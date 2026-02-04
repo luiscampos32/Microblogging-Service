@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% block title %}{{ user.username }}{% endblock %}
+{% block cssPath %}/static/user.css{% endblock %}
+{% block content %}
+<div id="profile-shell" class="profile-shell" data-user-id="{{ user.id }}">
+  {% if g.user %}
+      {% set state = g.user.follow_state(user.id) %}
+      <button class="follow pure-button" data-state="{{ state }}" disabled>Follow</button><br>
+  {% endif %}
+
+  <div class="avatar" id="profile-avatar"><img src="https://www.gravatar.com/avatar/{{ user.grav_hash }}"></div>
+  <h1 id="profile-username">{{ user.username }}</h1>
+{% if g.user %}
+  {% if user.username != g.user.username %}
+   {% if user.location is not none %}<p>Location: {{ user.location }}</p>{% endif %}
+   {% if user.bio != none %} <p>Bio: {{ user.bio }}</p>{% endif %}
+  {% else %}
+    {% if g.user.location != none %}<p>Location: {{ user.location }}</p>
+    {% else %}<p>No location!</p>{% endif %}
+    {% if user.bio != none %}<p>Bio: {{ user.bio }}</p>
+    {% else %}<p>No bio!</p>{% endif %}
+  {% endif %}
+{% endif %}
+  {% if g.user %}
+      {% if g.user.id == user.id %}
+          <div class="buttons pure-g">
+            <button class="postButton pure-button pure-u-1">Post</button>
+            <button class="photoButton pure-button pure-u-1">Add Photo</button>
+          </div>
+          <div>
+          <h3><a href="/edit_profile/{{ g.user.username }}">Edit</a></h3>
+          </div>
+  <div class="postForm">
+    <form method="POST" action="" class="pure-form">
+         <span class="cancel">X Close</span></label><br>
+    <input type="hidden" name="_csrf_token" value="{{ session.csrf_token }}">
+    <input type="hidden" data-user-id="{{ g.user.id }}">
+    <label for="inputArea">Post Something:</label>
+        <input type="text" id="inputArea" name="post" class="pure-input" maxlength="256" required="required" ><br>
+    <input type="submit" class="pure-button pure-button-primary" value="Post">
+    <div id="charactersLeft"></div>
+    </form>
+  </div>
+
+  <div class="photoForm">
+    <form method="POST" action="/post/photo-send" enctype="multipart/form-data" class="pure-form">
+           <span class="cancel">X Close</span></label><br>
+    <label>Description:
+        <input type="text" name="post" class="pure-input" maxlength="256"><br>
+        </label>
+        <input type="hidden" name="user-id" value="{{ g.user.id }}">
+        <input type="hidden" name="user-name" value="{{ g.user.username }}">
+        <input type="hidden" name="path" value="{{ request.path }}">
+    <label>Upload photo:
+        <input type="file" name="image" accept="image/*"></label><br>
+    <button type="submit" class="pure-button">Post photo</button>
+    </form>
+  </div>
+  {% endif %}
+
+    <div class="post-area" id="post-area">
+    <div id="new-post"></div>
+      {% for post in posts|sort(attribute='timestamp', reverse=True) %}
+          {% if count < 10 %}
+              {% set count =  count + 1 %}
+        <div class="tweet pure-g">
+          <div class="pic pure-u-1-6"><a href="/u/{{ user.username }}"><img src="https://www.gravatar.com/avatar/{{ user.grav_hash }}"></a></div>
+          <div class="tweet-container pure-u-5-6">
+            <p class="op"><a href="/u/{{ user.username }}">{{ user.username }}</a></p>
+              <div id="post-photo">
+                  {% if post.photo %}
+                  <br><img class="photo" width="auto" height="auto" src="{{ url_for('post_photo', post_id=post.id) }}"><br>
+                  {% endif %}
+              </div>
+            {{ post.content }}
+            <div id="post-info"> on {{ post.timestamp.strftime("%b %d, '%y %I:%M %p") }}</div>
+          </div>
+        </div>
+          {% else %}
+
+          {% endif %}
+      {% endfor %}
+    </div>
+
+  {% else %}
+    <p>You must <a href="/login">log in</a> to follow this user.</p>
+  {% endif %}
+    <div class="user-username" data-user-username="{{ user.username }}"></div>
+</div>
+
+
+  <script src="{{ url_for('static', filename='timeline.js') }}" async></script>
+  <script src="{{ url_for('static', filename='userpage.js') }}" async></script>
+
+    <script>
+  $(document).ready(function(){
+    $('.postForm').hide();
+    $('.photoForm').hide();
+  });
+
+  $('.postButton').click(function(){
+    $('.postForm').show();
+    $('.photoForm').hide();
+  });
+  $('.photoButton').click(function(){
+      $('.photoForm').show();
+      $('.postForm').hide();
+  });
+  $('.cancel').click(function(){
+    $('.pure-input').val("");
+    $('.photoForm').hide();
+    $('.postForm').hide();
+  });
+  </script>
+{% endblock %}

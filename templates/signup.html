@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}Sign up {% endblock %}
+{% block content %}
+    <div class="signupfullscreen">
+    <h1>Sign up</h1>
+
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
+
+    <form method="POST" action="/create_user" class="pure-form pure-form-stacked pure-u-1">
+        <input type="hidden" name="url" value="{{ request.args.url }}">
+        <label for="create-email">Email</label>
+        <input type="text" name="email" id="create-email">
+        <label for="create-username">Username</label>
+        <input type="text" name="username" id="create-username" maxlength="50">
+        <label for="create-password">Password</label>
+        <input type="password" name="password" id="create-password" required="required">
+        <label for="create-confirm">Confirm Password</label>
+        <input type="password" name="confirm" id="create-confirm" required="required">
+        <button type="submit" class="pure-button">Sign up</button>
+    </form>
+    </div>
+{% endblock %}

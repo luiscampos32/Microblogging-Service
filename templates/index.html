@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% block title %}Homepage{% endblock %}
+{% block fontAwesome %}<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">{% endblock %}
+
+{% block content %}
+{% if g.user %}
+  <div id="postArea" class="postForm">
+    <form method="POST" action="" class="pure-form">
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}">
+    <input type="hidden" data-user-id="{{ g.user.id }}">
+    <input type="hidden" class="user-username" data-user-username="{{ g.user.username }}">
+    <input type="hidden" class="grav-hash" data-grav-hash="{{ g.user.grav_hash }}">
+    <label for="inputArea">Compose Something:   <span id="cancel">X</span></label>
+    <input type="text" id="inputArea" name="post" class="pure-input" maxlength="256" required="required">
+    <input type="submit" class="pure-button pure-button-primary" value="Post">
+    <div id="charactersLeft"></div>
+    </form>
+  </div>
+
+      <div class="photoForm">
+        <form method="POST" action="/post/photo-send" enctype="multipart/form-data" class="pure-form">
+               <span class="cancel">X</span><br>
+        <label>Description:
+            <input type="text" name="post" class="pure-input" maxlength="256"><br>
+            </label>
+            <input type="hidden" name="user-id" value="{{ g.user.id }}">
+            <input type="hidden" name="user-name" value="{{ g.user.username }}">
+            <input type="hidden" name="path" value="{{ request.path }}">
+        <label>Upload photo:
+            <input type="file" name="image" accept="image/*"></label><br>
+        <button type="submit" class="pure-button post-photo-button">Post photo</button>
+        </form>
+  </div>
+
+  {% endif %}
+        <div id="liveFeed" class="post-area profile-shell">
+        <div id="new-post"></div>
+            {% for post in posts%}
+                {% if count < 20 %}
+                    {% set count = count + 1 %}
+                {% for user in users %}
+                    {% if post.creator_id == user.id %}
+                      <div class="tweet pure-g">
+                        <div class="pic pure-u-1-6"><a href="/u/{{ user.username }}"> <img src="https://www.gravatar.com/avatar/{{ user.grav_hash }}"></a></div>
+                        <div class="tweet-container pure-u-5-6">
+                         <div id="post-photo">
+                              {% if post.photo %}
+                              <br><img class="photo" width="200" height="200" src="{{ url_for('post_photo', post_id=post.id) }}"><br>
+                              {% endif %}
+                          </div>
+                          <p class="op"><a href="/u/{{ user.username }}">{{ user.username }}</a></p>
+                          <p class="tweet-content">{{ post.content }}</p> on {{ post.timestamp.strftime("%b %d, '%y %I:%M %p") }}
+                        </div>
+                      </div>
+                    {% endif %}
+                {% endfor %}
+                {% else %}
+                    {# at limit of posts for page #}
+                {% endif %}
+            {% endfor %}
+        </div>
+
+  <script src="{{ url_for('static', filename='timeline.js') }}" async></script>
+    <script>
+   $(document).ready(function(){
+    $('#postArea').hide();
+    $('.photoForm').hide();
+  });
+
+  $('#editPencil').click(function(){
+    $('#postArea').show();
+    $('.photoForm').hide();
+  });
+  $('#editPhoto').click(function() {
+    $('.photoForm').show();
+    $('#postArea').hide();
+  });
+    $('.cancel').click(function(){
+    $('#inputArea').val("");
+    $('#postArea').hide();
+    $('.photoForm').hide();
+  });
+    $('#cancel').click(function(){
+    $('#inputArea').val("");
+    $('#postArea').hide();
+    $('.photoForm').hide();
+  });
+
+  </script>
+{% endblock %}

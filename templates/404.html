@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block title %}Page Not Found{% endblock %}
+{% block content %}
+    <div class="info">
+        <h1>Page Not Found</h1>
+        <p>Your url request <code>{{ path }}</code> does not exist.
+        <br>Please go back to <a href = "/">home</a> page and enter a url in the textbox.</p>
+    </div>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}Log In{% endblock %}
+{% block content %}
+    <div class = "logincss">
+        <h1>Log in</h1>
+
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
+
+    <form action="/login" method="POST" class="pure-form pure-form-stacked pure-u-1">
+        <input type="hidden" name="url" value="{{ request.args.url }}">
+        <label for="login-username">Username</label>
+        <input type="text" name="username" id="login-username">
+        <label for="login-password">Password</label>
+        <input type="password" name="password" id="login-password">
+        <button type="submit" class="pure-button pure-button-primary">Log in</button>
+    </form>
+   </div>
+
+{% endblock %}

@@ -1,0 +1,190 @@
+* {
+    font-family: "Open Sans", Helvetica, sans-serif;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.pure-img-responsive {
+    max-width: 100%;
+    height: auto;
+}
+
+.home-menu {
+    padding: 0.5em;
+    background: #4099FF;
+    height: 11%;
+}
+.fa{
+    color: white;
+}
+.pure-menu.pure-menu-fixed {
+    z-index: 4;
+}
+
+.home-menu .dropdown-content  a:hover,
+.home-menu .dropdown-content  a:focus {
+    background: none;
+    border: none;
+    color: #AECFE5;
+}
+
+.content-wrapper {
+    position: absolute;
+    top: 12%;
+    width: 100%;
+    min-height: 12%;
+    z-index: 2;
+    background: white;
+
+}
+.signupfullscreen
+{
+    padding-left: 1.8em;
+}
+.logincss
+{
+    padding-left: 1.8em;
+}
+
+li a, .dropbtn {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+
+}
+
+
+li.dropdown {
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover{
+    background-color: #1f8dd6;
+}
+
+.show {display:block;}
+.others{
+    background-color: red;
+}
+
+@media (min-width: 48em) {
+
+    /* We increase the body font size */
+    body {
+        font-size: 16px;
+    }
+    /* We want to give the content area some more padding */
+    .content {
+        padding: 1em;
+    }
+    .home-menu{
+        height: 8%;
+    }
+    .home-menu .pure-menu-heading
+    {
+        float: none;
+    }
+
+    .profile-shell {
+        padding: 20px;
+        width: 75%;
+        margin-top: 12px;
+        margin-bottom: 12px;
+        margin-left: auto;
+        margin-right: auto;
+        background: white;
+        border-left: 12px solid #76C280;
+    }
+
+    .pic img {
+        margin-top: 10px;
+    }
+}
+
+#cancel{
+    color: red;
+    float: right;
+    padding-right: 12px;
+}
+
+.cancel {
+    color: red;
+    float: right;
+    padding-right: 12px;
+}
+#postArea{
+    width: 300px;
+    margin-left: auto; margin-right: auto;
+    padding: 12px;
+}
+
+.tweet{
+    min-height: 80px;
+    margin-top: 2px;
+    background-color: ghostwhite;
+    padding-left: 0.8em;
+    padding-bottom:5px;
+
+}
+
+.tweet-container {
+    padding-left: 10px;
+    padding-right: 12px;
+    word-wrap: break-word;
+}
+
+.pic img{
+    max-height: 64px;
+    max-width: 100%;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+}
+
+.op a{
+    text-decoration: none;
+    font-weight: 800;
+}
+
+.op {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.tweet-content {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.fa-pencil, .fa-picture-o {
+    cursor: pointer;
+}
+
+.editprofile
+{
+
+    padding-left: 0.8em;
+}
+
+.photoForm {
+    width: 300px;
+    margin-left: auto; margin-right: auto;
+    padding: 12px;
+}

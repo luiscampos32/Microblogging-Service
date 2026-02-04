@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}Edit Profile{% endblock %}
+{% block content %}
+    <div class = editprofile>
+  <h1>Edit Profile</h1>
+
+  <div id="edit-container">
+  {% if g.user %}
+    {% if g.user.id == user.id %}
+      <form method="POST" action="/post/edit_profile" class="pure-form pure-form-stacked">
+      <input type="hidden" name="_csrf_token" value="{{ csrf_token }}">
+          <fieldset>
+              <p>
+                  <label hidden>Location: <br></label>
+                  <input placeholder="Location" type="text" name="location" class="pure-input location-box" value="{{ g.user.location }}">
+              </p>
+              <p>
+                  <label hidden>Bio: <br></label>
+                  <textarea placeholder="Type your bio here..." rows="8" cols="25" name="bio" class="bio-box pure-input">{{ g.user.bio }}</textarea>
+              </p>
+              <button type="submit" class="pure-button pure-button-primary">Submit</button>
+          </fieldset>
+      </form>
+   {% endif %}
+   {% endif %}
+  </div>
+</div>
+
+{% endblock %}

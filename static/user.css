@@ -1,0 +1,104 @@
+h1 {
+    font-size: 2.5em;
+    line-height: 1.5em;
+}
+
+#post-area .fa {
+    color: black;
+}
+
+
+@media (min-width: 48em) {
+    .profile-shell {
+        padding: 20px;
+        width: 75%;
+        margin-top: 12px;
+        margin-bottom: 12px;
+        margin-left: auto;
+        margin-right: auto;
+        background: white;
+        border-left: 12px solid #76C280;
+    }
+}
+
+
+input[type=text] {
+    width: 90%;
+    padding: 12px 20px;
+    margin: 8px 20% 8px 0;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    outline: none;
+}
+
+input[type=submit]{
+    width: 90%;
+}
+
+button {
+    display: inline-block;
+    float: right;
+}
+
+#post-info {
+    width: 90%;
+    font-style: italic;
+    font-weight: 400;
+    font-size: .8em;
+    padding-left: 1.4em;
+    border-bottom: 1px solid grey;
+    padding-bottom: 2px;
+}
+
+#post-area, p {
+    font-weight: 500;
+    padding-left: 1em;
+    margin-top: 12px;
+    margin-bottom: 6px;
+}
+
+#post-photo img {
+    max-width: 200px;
+    max-height: 200px;
+}
+
+#profile-avatar {
+    display: block;
+    float: left;
+    margin-right: 10px;
+    margin-bottom: 8px;
+}
+
+#profile-avatar img {
+    display: block;
+    padding: 2px;
+    margin-right: 4px;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+    max-width: 64px;
+    max-height: 64px;
+}
+.postButton.pure-button {
+    background-color: dodgerblue;
+    color: white;
+    width: 7em;
+}
+
+.photoButton.pure-button {
+    background-color: dodgerblue;
+    color: white;
+    width: 8em;
+}
+
+#new-post {
+    background: ghostwhite;
+    padding-left: 1em;
+}
+
+#new-post em {
+    font-size: 0.8em;
+}
+
+#new-post p {
+    padding-left: 16px;
+}
